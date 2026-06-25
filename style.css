@@ -28,7 +28,7 @@ button { font: inherit; }
 #start-screen {
   background:
     linear-gradient(90deg, rgba(18, 31, 26, .76), rgba(18, 31, 26, .1)),
-    url("assets/farm-title.png") center/cover;
+    url("assets/farm-title.jpg") center/cover;
 }
 
 .hero { min-height: 100vh; display: grid; place-items: center start; padding-left: 9vw; }
