@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="暖禾农场 - 原创 2D 像素风农场小游戏" />
+  <title>暖禾农场</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main id="app">
+    <section id="start-screen" class="screen active">
+      <div class="hero">
+        <div class="hero-card">
+          <p class="eyebrow">一封来自乡野的邀请</p>
+          <h1>暖禾农场</h1>
+          <p>种下今天，收获明天。</p>
+          <button id="start-btn" class="pixel-button primary">开始新生活</button>
+          <button id="continue-btn" class="pixel-button">继续游戏</button>
+          <p class="tiny">电脑用 WASD，手机用方向键移动；点击土地进行操作</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="game-screen" class="screen">
+      <header class="topbar">
+        <div class="brand"><span>🌾</span> 暖禾农场</div>
+        <div class="status-card date-card">
+          <strong id="date-label">春季 1 日</strong>
+          <span id="time-label">06:00</span>
+        </div>
+        <div class="status-card"><span class="coin">●</span><strong id="coins-label">500</strong></div>
+        <div class="energy-wrap">
+          <span>体力</span>
+          <div class="energy-track"><i id="energy-bar"></i></div>
+          <b id="energy-label">100</b>
+        </div>
+        <button id="help-btn" class="icon-button" aria-label="帮助">?</button>
+        <button id="sound-btn" class="icon-button" aria-label="声音">♪</button>
+      </header>
+
+      <div class="game-layout">
+        <aside class="side-panel inventory-panel">
+          <h2>背包</h2>
+          <div id="inventory-list" class="inventory-list"></div>
+          <div class="panel-tip">走近商店并点击建筑，可以购买种子、肥料或出售作物。</div>
+        </aside>
+
+        <div class="canvas-wrap">
+          <canvas id="game" width="640" height="640" aria-label="农场地图"></canvas>
+          <div id="toast" class="toast"></div>
+          <div id="night-overlay" class="night-overlay"></div>
+          <button id="sleep-btn" class="sleep-button">回家睡觉</button>
+          <div class="mobile-controls" aria-label="触屏移动控制">
+            <button class="move-btn up" data-move="arrowup" aria-label="向上">▲</button>
+            <button class="move-btn left" data-move="arrowleft" aria-label="向左">◀</button>
+            <button class="move-btn down" data-move="arrowdown" aria-label="向下">▼</button>
+            <button class="move-btn right" data-move="arrowright" aria-label="向右">▶</button>
+          </div>
+        </div>
+
+        <aside class="side-panel task-panel">
+          <h2>今日札记</h2>
+          <div class="day-note">
+            <span class="sun-icon">☀</span>
+            <p id="daily-tip">开垦一块土地，种下第一颗种子吧。</p>
+          </div>
+          <h3>作物图鉴</h3>
+          <div id="crop-guide"></div>
+          <div class="legend">
+            <span><i class="legend-dot dry"></i>干燥</span>
+            <span><i class="legend-dot wet"></i>已浇水</span>
+            <span><i class="legend-dot fed"></i>已施肥</span>
+          </div>
+        </aside>
+      </div>
+
+      <footer class="toolbar-shell">
+        <div id="toolbar" class="toolbar"></div>
+        <div id="selected-info" class="selected-info">锄头 · 翻耕空地</div>
+      </footer>
+    </section>
+  </main>
+
+  <div id="modal-backdrop" class="modal-backdrop">
+    <section id="shop-modal" class="modal">
+      <button class="modal-close" data-close>×</button>
+      <div class="shop-header">
+        <div><p class="eyebrow">麦穗杂货铺</p><h2>早上好，农场主！</h2></div>
+        <div class="shop-coins"><span class="coin">●</span><b id="shop-coins">500</b></div>
+      </div>
+      <div class="shop-tabs">
+        <button class="tab active" data-tab="buy">购买</button>
+        <button class="tab" data-tab="sell">出售</button>
+      </div>
+      <div id="shop-items" class="shop-items"></div>
+    </section>
+
+    <section id="help-modal" class="modal small-modal">
+      <button class="modal-close" data-close>×</button>
+      <p class="eyebrow">农场手册</p>
+      <h2>如何游玩</h2>
+      <div class="help-grid">
+        <b>WASD / 方向键</b><span>移动角色</span>
+        <b>鼠标左键</b><span>对附近格子使用当前工具</span>
+        <b>1 - 8 / 滚轮</b><span>切换工具和种子</span>
+        <b>点击商店</b><span>购买与出售</span>
+        <b>回家睡觉</b><span>结算成长并进入下一天</span>
+      </div>
+      <p class="panel-tip">肥料会让作物少用 1 天成熟，并将售价提高 25%。作物只有当天浇水，睡觉后才会成长。</p>
+    </section>
+
+    <section id="event-modal" class="modal small-modal event-modal">
+      <div class="thief">🕵</div>
+      <p class="eyebrow">夜间事件</p>
+      <h2>昨晚有人偷走了你的作物！</h2>
+      <p id="event-text">田里似乎少了些什么……</p>
+      <button class="pixel-button primary" data-close>知道了</button>
+    </section>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
